@@ -1,0 +1,78 @@
+{
+  "name": "tomato-clock",
+  "version": "1.0.0",
+  "description": "番茄时钟应用 - 提高工作效率的时间管理工具",
+  "main": "main.js",
+  "scripts": {
+    "dev": "vite",
+    "electron": "NODE_ENV=development electron .",
+    "start": "concurrently -k 'npm run dev' 'wait-on http://127.0.0.1:3000 && npm run electron'",
+    "build": "vite build && electron-builder",
+    "preview": "vite preview",
+    "build:win": "vite build && electron-builder --win",
+    "build:mac": "vite build && electron-builder --mac",
+    "build:linux": "vite build && electron-builder --linux",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "electron",
+    "番茄时钟",
+    "pomodoro",
+    "productivity"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^6.0.1",
+    "concurrently": "^9.2.1",
+    "electron": "^38.3.0",
+    "electron-builder": "^25.1.7",
+    "vite": "^7.1.12",
+    "vite-plugin-electron": "^0.29.0",
+    "wait-on": "^9.0.1"
+  },
+  "build": {
+    "appId": "com.tomatoclock.app",
+    "productName": "番茄时钟",
+    "asar": true,
+    "directories": {
+      "output": "dist-electron",
+      "app": "."
+    },
+    "files": [
+      "main.js",
+      "preload.js",
+      "db-service.js",
+      "notification.html",
+      "assets/**/*",
+      "dist/**/*",
+      "node_modules/sqlite3/**/*"
+    ],
+    "mac": {
+      "icon": "assets/tomato.png",
+      "target": [
+        "dmg",
+        "zip"
+      ]
+    },
+    "win": {
+      "icon": "assets/tomato.png",
+      "target": "nsis"
+    },
+    "linux": {
+      "icon": "assets/tomato.png",
+      "target": [
+        "AppImage",
+        "deb"
+      ]
+    }
+  },
+  "dependencies": {
+    "chart.js": "^4.5.1",
+    "marked": "^16.4.1",
+    "sqlite3": "^5.1.7",
+    "vue": "^3.5.22",
+    "vue-router": "^4.6.3",
+    "vuex": "^4.1.0"
+  }
+}
